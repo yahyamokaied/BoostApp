@@ -234,7 +234,7 @@ return (
 <FlatList
         data={completedActivity}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => 'key'+index}
         extraData={id}
       />
 

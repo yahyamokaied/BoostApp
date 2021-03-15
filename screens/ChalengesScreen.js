@@ -53,7 +53,7 @@ return (
       <FlatList
         data={challenges}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => 'key'+index}
       />
 </View>
 

@@ -204,9 +204,7 @@ try {
 
       console.log('fonts loaded')
 
-    restoreToken();
-fetchCompetitions();
-fetchChallenges();
+      restoreToken();
 
     };
    
@@ -231,12 +229,11 @@ useEffect(() => {
     }
 })();
 
-fetchCompetitions();
-fetchChallenges();
-
   fetchMe();
   fetchSteps();
   fetchStarPoints();
+  fetchCompetitions();
+  fetchChallenges();
   fetchMyTeam();
   fetchPhoto();
   fetchMyTeamMembers();
@@ -338,29 +335,6 @@ AppleHealthKit.initHealthKit(options, (err, results) => {
 });
 };
 
-
-/* const fetchSteps = async() => {
-  try {
-    const response = await fetch(`${fetchMeconfig.stepUrl}/steps/latest/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJub25jZSI6Inl6cG5yOXdoc2cwbGF0T2Z5TkxTUm5GR01HdzZWUnVsXy16YjdoYUZYUDAiLCJhbGciOiJSUzI1NiIsIng1dCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyIsImtpZCI6Im5PbzNaRHJPRFhFSzFqS1doWHNsSFJfS1hFZyJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mODJiMGZiNy0wMTAxLTQxMGQtOGU4Ny0wZWZhN2MxZDM5NzgvIiwiaWF0IjoxNjExODM3NjQ1LCJuYmYiOjE2MTE4Mzc2NDUsImV4cCI6MTYxMTg0MTU0NSwiYWNjdCI6MCwiYWNyIjoiMSIsImFjcnMiOlsidXJuOnVzZXI6cmVnaXN0ZXJzZWN1cml0eWluZm8iLCJ1cm46bWljcm9zb2Z0OnJlcTEiLCJ1cm46bWljcm9zb2Z0OnJlcTIiLCJ1cm46bWljcm9zb2Z0OnJlcTMiLCJjMSIsImMyIiwiYzMiLCJjNCIsImM1IiwiYzYiLCJjNyIsImM4IiwiYzkiLCJjMTAiLCJjMTEiLCJjMTIiLCJjMTMiLCJjMTQiLCJjMTUiLCJjMTYiLCJjMTciLCJjMTgiLCJjMTkiLCJjMjAiLCJjMjEiLCJjMjIiLCJjMjMiLCJjMjQiLCJjMjUiXSwiYWlvIjoiQVNRQTIvOFRBQUFBMDFrbDRMaE51b2dtVUplek54WU9Bc1pCWnlmajU4QzhGaGJxbCtmd1FWVT0iLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6IkJvb3N0YXBwIiwiYXBwaWQiOiIwYmEyMjQ2NS1mZGEyLTQ4M2QtOThmZS1mOWVlNmRkNWQyY2QiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6Ik1va2FpZWQiLCJnaXZlbl9uYW1lIjoiWWFoeWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI3OC42OS44Mi4xMTciLCJuYW1lIjoiWWFoeWEgTW9rYWllZCIsIm9pZCI6IjE4MWRhYjg1LWIzNzMtNGI4NC05ODFiLTk1MGZkMWQ1OTMxZCIsIm9ucHJlbV9zaWQiOiJTLTEtNS0yMS0yNTAwODMzODUxLTM1MTE0OTc0NjUtMzE3MTQxODM0NS00NDU2OSIsInBsYXRmIjoiMiIsInB1aWQiOiIxMDAzMjAwMERFRUVCQ0Y1IiwicmgiOiIwLkFRa0F0dzhyLUFFQkRVR09odzc2ZkIwNWVHVWtvZ3VpX1QxSW1QNzU3bTNWMHMwSkFOYy4iLCJzY3AiOiJVc2VyLlJlYWQgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiJHZHNqLUNaUzhURWlUX0RXb09ncVhtaHAtMUhGbHRXd3VqeDUxMEhPUWcwIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiZjgyYjBmYjctMDEwMS00MTBkLThlODctMGVmYTdjMWQzOTc4IiwidW5pcXVlX25hbWUiOiJZYWh5YS5Nb2thaWVkQHNpZ21hLnNlIiwidXBuIjoiWWFoeWEuTW9rYWllZEBzaWdtYS5zZSIsInV0aSI6InpQd1loVkZ0QzB1RFdublBTN0FjQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiYnQ0aUtFbUdPSENCR0tJemZ4elR2SHRqaDFjMDFMZjRTTXVpTDRiRWpDUSJ9LCJ4bXNfdGNkdCI6MTM2NDk3NDE5Nn0.YA9UlQvJ1no0CtTJxvd_gmel8S72ovB_cvIaMTP_XMjr9qnzUMUYAJR5FjIbDi-esP3i13ltuClUiijEX2UkcRxkxj4Hr4eGLXPwnqWUlB_ery1ap1q4CVMpvDUoDknNMZXr4UYrgxxGP9XICwx8bU7wBbNiuaZaIwabPmOJ9d002rDwOgL-buOKGGEIdYiqDjB3bbOQbc2tFKz7bbKt0-T4c7TnNKgPVosG8lMRzsBiQVqqkfZEt05ksr5gfmearOzI-G_uD2zzUYgmmb3jDRFcdY7eP00jHEQC3qjMQkMpAASo5Ugxena8kmaguf2pfMbhO4fhdwwaCqTHwmaejg',
-      },
-    });
-    if (!response.ok) {
-      console.log("Fetch Error: ",response.status);
-    } else {
-      let result = await response.json();
-      console.log("fetchSteps : ",result.stepCount);
-      return result.stepCount;
-    }
-  } catch (error) {
-    
-    console.log("fetch error : ",error);
-    console.log("fetch error : ",error);
-  }
-} */
 
 
 const fetchCompletedActivity = async() => {
@@ -532,13 +506,10 @@ const fetchMyTeamMembers = async() => {
 // Fetch my starpoints
 const fetchStarPoints = async() => {
 
-
 // Date
 let Day = new Date().getDate().toString()
 let Month = new Date().getMonth().toString()
 let Year = new Date().getFullYear().toString()
-let dateStartThisMonth = Year+'-'+Month+'-01T00:00:00.000Z'
-let dateStartThisYear = Year+'-01-01T00:00:00.000Z'
 let dateStartToday = Year+'-'+Month+'-'+Day+'T00:00:00.000Z'
 
   try {
