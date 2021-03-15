@@ -1,39 +1,17 @@
 import React, {useContext} from 'react';
-import { ScrollView, View, StyleSheet, Text, TouchableHighlight } from 'react-native';
-import { Screen, Colors, Buttons, AppText, AppStyle, AppColor } from '../components/styles';
+import { View, StyleSheet } from 'react-native';
+import { Screen, AppText, AppStyle, AppColor } from '../components/styles';
 import ProfileImage from '../components/screens/ProfileImage';
 import FastImage from 'react-native-fast-image';
 import AuthContext from '../auth/context';
 import AppIcon from '../Assets/Icons/icons';
 
-
-import TeamHUD from '../components/screens/TeamHUD';
-import TeaminfoBar from '../components/screens/TeaminfoBar';
-import ListOfTeamMembers from '../components/screens/ListOfTeamMembers';
-
 const TeamsScreen = ({ navigation }) => {
 
   const {
-    azureToken,setAzureToken,
-    googleToken,setGoogleToken,
-    name,setName,
-    id,setID,
-    mail,setMail,
-    photo,setPhoto,
-    teamName,setTeamName,
-    dailyStepsTotal,setDailyStepsTotal,
-    weeklyStepsTotal,setWeeklyStepsTotal,
-    monthlyStepsTotal,setMonthlyStepsTotal,
-    weeklySteps,setWeeklySteps,
-    monthlySteps,setMonthlySteps,
-    starPoints,setStarPoints,
-    competition,setCompetition,
-    modalVisible,setModalVisible,
-    pickerActive, setPickerActive,
-    pickerType,setPickerType,
-    pickerDuration,setPickerDuration,
-    completedActivity,setCompletedActivity,
-    allActivities,setAllActivities
+    name,
+    photo,
+    starPoints
   } = useContext(AuthContext);
 
 return (
@@ -110,18 +88,8 @@ return (
 
 
 </View>
-
 <ProfileImage />
-
 </Screen>
-
-/* <Screen>
-<TeamHUD />
-<TeaminfoBar />
-<ListOfTeamMembers />
-<ProfileImage />
-</Screen> */
-
 
 );
 };

@@ -1,19 +1,13 @@
 import React, {useContext} from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, FlatList, TouchableHighlight, Image} from 'react-native';
-import { Screen, Colors, AppText, AppStyle, AppColor } from '../components/styles';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { Screen, AppText, AppStyle, AppColor } from '../components/styles';
 import {AppButton} from '../components/styles/AppButton';
 import FastImage from 'react-native-fast-image';
 import AppIcon from '../Assets/Icons/icons';
-
-
 import AuthContext from '../auth/context';
-import TeaminfoBar from '../components/screens/TeaminfoBar';
-import UserHUD from '../components/screens/UserHUD';
-import Steps from '../components/screens/Steps';
-import AsyncStorage from '@react-native-community/async-storage';
 import AddActivity from '../components/screens/AddActivity';
 import ActivityHUD from '../components/screens/ActivityHUD';
-import { Text3 } from '../components/styles/AppText';
+
 
 const MyActivityScreen = ({ navigation }) => {
 

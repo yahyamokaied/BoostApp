@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { StyleSheet,ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Screen, AppStyle,  AppColor  } from '../components/styles';
 import {AppButton} from '../components/styles/AppButton';
 import AuthContext from '../auth/context';

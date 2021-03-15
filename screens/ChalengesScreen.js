@@ -2,15 +2,11 @@ import React, {useContext} from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Screen, AppStyle, AppColor } from '../components/styles';
 import FastImage from 'react-native-fast-image';
-
 import * as AppText from '../components/styles/AppText';
-
 import AuthContext from '../auth/context';
 import ProfileImage from '../components/screens/ProfileImage';
 import Challenge from '../components/screens/Challenge';
 import AppIcon from '../Assets/Icons/icons';
-
-
 
 const CompetitionScreen = ({ navigation }) => {
 

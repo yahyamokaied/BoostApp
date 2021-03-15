@@ -1,31 +1,15 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { ScrollView, View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Screen, Colors, Buttons, AppText, AppStyle, AppColor } from '../components/styles';
+import React, { useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Screen, AppText, AppStyle, AppColor } from '../components/styles';
 import FastImage from 'react-native-fast-image';
 import AppIcon from '../Assets/Icons/icons';
-
 import AuthContext from '../auth/context';
-
 import ProfileImage from '../components/screens/ProfileImage';
-import NotificationItem from '../components/screens/NotificationItem';
 
 const NotificationsScreen = ({ navigation }) => {
 
     const {
         azureToken,setAzureToken,
-        googleToken,setGoogleToken,
-        name,setName,
-        id,setID,
-        mail,setMail,
-        photo,setPhoto,
-        teamName,setTeamName,
-        dailyStepsTotal,setDailyStepsTotal,
-        weeklyStepsTotal,setWeeklyStepsTotal,
-        monthlyStepsTotal,setMonthlyStepsTotal,
-        weeklySteps,setWeeklySteps,
-        monthlySteps,setMonthlySteps,
-        starPoints,setStarPoints,
-        competition,setCompetition
       } = useContext(AuthContext);
 
 return (
@@ -62,23 +46,8 @@ return (
 
 
 </View>
-
 <ProfileImage />
-
 </Screen>
-
-/* <>
-<View style={styles.header} >
-<Icon name="ios-notifications" color={'white'} size={26} style={styles.icon}/>
-<Text style={styles.headerText}>Notificatios</Text>
-</View>
-<ScrollView style={styles.container}>
-<NotificationItem />
-<NotificationItem />
-<NotificationItem />
-<NotificationItem />
-</ScrollView>
-</> */
 
 );
 };

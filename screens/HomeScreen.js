@@ -1,25 +1,18 @@
 import React, {useContext} from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-
 import { AppStyle, Screen, AppColor, AppText } from '../components/styles';
 import FastImage from 'react-native-fast-image';
 import AuthContext from '../auth/context';
 import AppIcon from '../Assets/Icons/icons';
-
 import ProfileImage from '../components/screens/ProfileImage';
-import Competition from '../components/screens/Competition';
-import Steps from '../components/screens/Steps';
-import News from '../components/screens/News';
-
 
 const HomeScreen = ({ navigation }) => {
 
 
   const {
-    competitions,setCompetitions,
-    lastCompetition,setLastCompetition,
-    dailyStepsTotal,setDailyStepsTotal,
-    starPoints,setStarPoints
+    lastCompetition,
+    dailyStepsTotal,
+    starPoints
 
   } = useContext(AuthContext);
 
@@ -42,11 +35,6 @@ return (
 </View>
 
 </View>
-
-
-
-
-
 
 {/* Header 2 */}
   <View style={styles.header2}>
@@ -120,9 +108,7 @@ return (
 
 );
 };
-    {/* <Competition /> */}
-    {/* <Steps /> */}
-    {/* <News /> */}
+
 export default HomeScreen;
 
 const styles = StyleSheet.create({
