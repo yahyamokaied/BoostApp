@@ -305,6 +305,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BoostApp/BoostApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 929N68FKLV;
 				ENABLE_BITCODE = NO;
@@ -326,6 +328,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigma.BoostApp20;
 				PRODUCT_NAME = BoostApp;
+				PROVISIONING_PROFILE_SPECIFIER = BoostApp20AdHocDist;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -339,6 +342,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BoostApp/BoostApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 929N68FKLV;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -355,6 +360,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.sigma.BoostApp20;
 				PRODUCT_NAME = BoostApp;
+				PROVISIONING_PROFILE_SPECIFIER = BoostApp20AdHocDist;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
