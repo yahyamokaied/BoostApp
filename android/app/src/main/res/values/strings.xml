@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BoostApp</string>
+     <string moduleConfig="true" name="CodePushDeploymentKey">BexFLElPaDdLJtArnkNmJKsJrKoN5-qwHMMeU</string>
+</resources>

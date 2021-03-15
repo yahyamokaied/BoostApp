@@ -1,0 +1,12 @@
+{
+  "name": "BoostApp",
+  "displayName": "BoostApp",
+  "expo": {
+    "name": "BoostApp",
+    "slug": "BoostApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

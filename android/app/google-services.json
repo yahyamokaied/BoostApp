@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997717850091",
+    "firebase_url": "https://boostapp-d7224.firebaseio.com",
+    "project_id": "boostapp-d7224",
+    "storage_bucket": "boostapp-d7224.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997717850091:android:3f36b58a12aa697ec18bae",
+        "android_client_info": {
+          "package_name": "com.boostapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997717850091-28c1sta9f73rhffc1lfe29ms42ndgmkn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boostapp",
+            "certificate_hash": "bb26d9ca8a33676094a5b8a7c0faecc8b857f82c"
+          }
+        },
+        {
+          "client_id": "997717850091-lu64m27idmbd9p34u2h60lpkhocovhop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3AVXyd9NmurgC8i49f_rFQO3DcJaOnEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997717850091-lu64m27idmbd9p34u2h60lpkhocovhop.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
