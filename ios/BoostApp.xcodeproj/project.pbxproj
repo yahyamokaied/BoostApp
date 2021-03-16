@@ -14,6 +14,7 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		535CC7EB253F6779001305E4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535CC7EA253F6779001305E4 /* HealthKit.framework */; };
 		53C95FA125FC1C3300280F15 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53C95FA025FC1C3300280F15 /* BootSplash.storyboard */; };
+		53F358A1260098F100D69090 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53F358A0260098F100D69090 /* AppCenter-Config.plist */; };
 		96905EF65AED1B983A6B3ABC /* libPods-BoostApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-BoostApp.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		535CC7E9253F6779001305E4 /* BoostApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BoostApp.entitlements; path = BoostApp/BoostApp.entitlements; sourceTree = "<group>"; };
 		535CC7EA253F6779001305E4 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		53C95FA025FC1C3300280F15 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = BoostApp/BootSplash.storyboard; sourceTree = "<group>"; };
+		53F358A0260098F100D69090 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "BoostApp/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-BoostApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoostApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-BoostApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostApp.debug.xcconfig"; path = "Target Support Files/Pods-BoostApp/Pods-BoostApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-BoostApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostApp.release.xcconfig"; path = "Target Support Files/Pods-BoostApp/Pods-BoostApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				53F358A0260098F100D69090 /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* BoostApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -193,6 +196,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+				53F358A1260098F100D69090 /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
