@@ -64,6 +64,15 @@ export const Text6 = ( { children, textAlign = 'center', color = AppColor.WhiteC
             );
 };
 
+export const Text7 = ( { children, textAlign = 'center', color = AppColor.WhiteColor } ) => {
+    return (
+            <Text
+                style={ [styles.text7, {textAlign}, {color} ] }>
+                {children}
+            </Text>
+            );
+};
+
 
 const styles = StyleSheet.create({
     text1: {        
@@ -106,6 +115,12 @@ const styles = StyleSheet.create({
     },
 
     text7: {        
+        fontSize: ww / 32,
+        fontFamily: 'Arial',
+        marginVertical: hh / 500,
+    },
+
+    text8: {        
         fontSize: ww / 34,
         fontFamily: Platform.OS === 'android' ? "Roboto" : "Avenir",
         marginVertical: hh / 500

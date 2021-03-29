@@ -197,7 +197,23 @@ return (
 </View>
 <AppText.Text6 color={AppColor.BlackColor} >{activityDate ? activityDate : 'No Date'}</AppText.Text6>
 
-<TouchableOpacity onPress={() => deleteActivity(activityDelete)}>
+<TouchableOpacity onPress={() =>
+
+
+     Alert.alert(
+      "Are you Sure",
+      "(delete this completed activity)",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Delete", onPress: () => deleteActivity(activityDelete) }
+      ]
+    )
+
+}>
 <AppIcon name='delete' size={-2} color={AppColor.LightGray}/>
 </TouchableOpacity>
 </TouchableOpacity>

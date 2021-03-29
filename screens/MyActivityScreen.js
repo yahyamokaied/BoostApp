@@ -7,6 +7,7 @@ import AppIcon from '../Assets/Icons/icons';
 import AuthContext from '../auth/context';
 import AddActivity from '../components/screens/AddActivity';
 import ActivityHUD from '../components/screens/ActivityHUD';
+import { useState } from 'react';
 
 
 const MyActivityScreen = ({ navigation }) => {
@@ -35,6 +36,7 @@ const MyActivityScreen = ({ navigation }) => {
     isEditActivity,setIsEditActivity
   } = useContext(AuthContext);
 
+  const [stepType,setStepType] = useState('Weekly');
 
 
   const renderItem = ({ item }) => (
@@ -142,78 +144,172 @@ return (
 
 <View style={styles.steps}>
 
+
+{stepType === 'Daily' ? 
       <View style={styles.colno}>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>6000</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 6000}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Mon</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00001 * 10000}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Today</AppText.Text6>
+      </View>
+
+      </View>
+
+: null}
+
+{stepType === 'Weekly' ? 
+      <View style={styles.colno}>
+
+      <View style={styles.graphcol}>
+      <AppText.Text6 color={AppColor.DarkGray}>6000</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 15000}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Mon</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>1200</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 1200}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Tue</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 1200}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Tue</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>300</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 300}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Wed</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 300}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Wed</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>1500</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 1500}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Thu</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 1500}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Thu</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
-      <AppText.Text6 alignSelf={'flex-end'} color={AppColor.DarkGray}>1555</AppText.Text6>
-      <View style={styles.graph} />
-      <AppText.Text6 color={AppColor.DarkGray}>Fri</AppText.Text6>
+      <AppText.Text6 color={AppColor.DarkGray}>1500</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 1500}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Fri</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>4400</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 4400}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Sat</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 4400}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Sat</AppText.Text6>
       </View>
 
       <View style={styles.graphcol}>
       <AppText.Text6 color={AppColor.DarkGray}>3200</AppText.Text6>
-      <View style={[styles.graph,{height:AppStyle.hh * 0.000017 * 3200}]} />
-      <AppText.Text6 color={AppColor.DarkGray}>Sun</AppText.Text6>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.000008 * 3200}]} />
+      <AppText.Text6 color={AppColor.BlackColor}>Sun</AppText.Text6>
+      </View>
       </View>
 
+: null}
+
+
+{stepType === 'Yearly' ? 
+      <View style={styles.colno}>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 490000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Jan</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 320001}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Feb</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 300000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Mar</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 200000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Apr</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 320000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>May</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 100000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Jun</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 100000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Jul</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 432000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Aug</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 154000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Sep</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 100000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Oct</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>45K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 450000}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Nov</AppText.Text7>
+      </View>
+
+      <View style={styles.graphcol}>
+      <AppText.Text7 color={AppColor.DarkGray}>60K</AppText.Text7>
+      <View style={[styles.graph,{height:AppStyle.hh * 0.00000028 * 15400}]} />
+      <AppText.Text7 color={AppColor.BlackColor}>Dec</AppText.Text7>
       </View>
 
 
-      
+      </View>
+
+: null}
 
 
 
           <View style={styles.stepbuttons}>
             
-<AppButton onPress={() => console.log('1') }
+<AppButton onPress={() => setStepType('Daily') }
         title='Daily'
-        backgroundColor={AppColor.BlackColor}
+        backgroundColor={stepType === 'Daily' ? AppColor.DarkGray : AppColor.BlackColor}
         width={AppStyle.ww / 3.8}
         height={AppStyle.hh / 25}
         marginHorizontal={AppStyle.ww / 80}
         marginVertical={AppStyle.hh / 120}
 />
-<AppButton onPress={() => console.log('2') }
+<AppButton onPress={() => setStepType('Weekly') }
         title='Weekly'
-        backgroundColor={AppColor.DarkGray}
+        backgroundColor={stepType === 'Weekly' ? AppColor.DarkGray : AppColor.BlackColor}
         width={AppStyle.ww / 3.8}
         height={AppStyle.hh / 25}
         marginHorizontal={AppStyle.ww / 80}
         marginVertical={AppStyle.hh / 120}
 />
-<AppButton onPress={() => console.log('3') }
+<AppButton onPress={() => setStepType('Yearly') }
         title='Yearly'
-        backgroundColor={AppColor.BlackColor}
+        backgroundColor={stepType === 'Yearly' ? AppColor.DarkGray : AppColor.BlackColor}
         width={AppStyle.ww / 3.8}
         height={AppStyle.hh / 25}
         marginHorizontal={AppStyle.ww / 80}
@@ -277,7 +373,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
-    backgroundColor: AppColor.BGColor
+    backgroundColor: AppColor.BlackColor
   },
   header1overlay: {
     width: '100%',
@@ -428,45 +524,40 @@ const styles = StyleSheet.create({
   steps: {
     width:'90%',
     height: '38%',
-    borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
     flexDirection:'column',
-    alignItems:'center',
+    alignItems:'flex-start',
+    borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
     borderWidth:0.25,
     borderColor: AppColor.LightGray,
-    marginVertical:AppStyle.hh * 0.008
+    marginVertical:AppStyle.hh * 0.008,
   },
   colno: {
     width:'100%',
+    height:'75%',
     flexDirection:'row',
-    alignItems:'center',
+    alignItems:'flex-start',
     justifyContent:'space-evenly',
+    padding: AppStyle.ww / 100
+
   },
   graphcol: {
+    height:'100%',
     flexDirection:'column',
     alignItems:'center',
-    justifyContent:'center',
-    marginTop:5
+    justifyContent:'flex-end',
   },
   graph: {
-    width: AppStyle.ww * 0.06,
-    height: '70%',
+    width: AppStyle.ww * 0.04,
     backgroundColor:AppColor.LightGray,
-    position:'absolute',
-    bottom:-80,
   },
-  graphline: {
-    width: AppStyle.ww * 0.8,
-    position:'absolute',
-    top:AppStyle.hh * 0.205
+  graphtext: {
+    height: '20%',
   },
   stepbuttons : {
     flexDirection:'row',
     width:'100%',
-    height: '20%',
+    height:'22%',
     justifyContent:'center',
-    marginBottom: AppStyle.hh * 0.02,
-    position:'absolute',
-    bottom:-2,
   },
   completed: {
     width:'95%',

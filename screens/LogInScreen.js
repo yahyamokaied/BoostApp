@@ -1,19 +1,21 @@
 import React, { useEffect, useContext } from 'react';
-import { StyleSheet } from 'react-native';
-import { Screen, AppStyle,  AppColor  } from '../components/styles';
+import { StyleSheet, View } from 'react-native';
+import { Screen, AppStyle,  AppColor, AppText  } from '../components/styles';
 import {AppButton} from '../components/styles/AppButton';
 import AuthContext from '../auth/context';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import GoogleFit from 'react-native-google-fit';
 import { azureAdAppProps } from '../components/functions/SigmaLoginFunctions';
 import * as AuthSession from 'expo-auth-session';
 import FastImage from 'react-native-fast-image';
 
+
 const LogInScreen = ({ navigation }) => {
 
 const {
   azureToken,setAzureToken,
-  azureCode,setAzureCode
+  azureCode,setAzureCode,
+  isLoading,setIsLoading
 } = useContext(AuthContext);
 
 useEffect(() => {
@@ -49,14 +51,15 @@ let res = await openAuthSession(azureAdAppProps);
 
     let sToken = String(JSON.stringify(res.access_token));
     let finalToken = sToken.substring(1, sToken.length-1);
-    await AsyncStorage.setItem('access_token_sigma', finalToken );
+
+    await AsyncStorage.setItem('@access_token_sigma', finalToken );
 
     console.log("The Refresh token: ",res)
     console.log("The Refresh Code: ",res.refresh_token)
 
 if( res.type !== 'error' || res.type !== 'dismiss')
     setAzureCode( res.refresh_token );
-
+    await AsyncStorage.setItem('@azore_code', res.refresh_token );
     setAzureToken( finalToken );
 
     console.log("access_token_sigma: ", String(JSON.stringify(res)));
@@ -161,13 +164,19 @@ return (
   <FastImage
     style={styles.bg}
     source={require('../Assets/images/bg.png')} >
-
-        <AppButton onPress={() => SigmaLogin() }
-          title='Login' position='absolute'
-          bottom={AppStyle.hh / 5}
-          width={AppStyle.ww / 3}
-          backgroundColor={AppColor.BlackColor}
-  />
+{ !isLoading ?
+    <AppButton onPress={() => SigmaLogin() }
+              title='Login' position='absolute'
+              bottom={AppStyle.hh / 5}
+              width={AppStyle.ww / 3}
+              backgroundColor={AppColor.BlackColor}
+      /> 
+      :
+      <View style={styles.loading}>
+      <AppText.Text3 color={AppColor.WhiteColor} >Loading ...</AppText.Text3>
+      </View>
+}
+        
   </FastImage>
 </Screen>
 );
@@ -179,6 +188,14 @@ const styles = StyleSheet.create({
   bg: {
     width: AppStyle.ww,
     height: AppStyle.hh,
-    backgroundColor: AppColor.BGColor
+    backgroundColor: AppColor.BlackColor
+  },
+  loading : {
+    flexDirection:'column',
+    alignContent:'center',
+    justifyContent:'center',
+    alignSelf:'center',
+    position:'absolute',
+    bottom: AppStyle.hh / 5
   }
 });

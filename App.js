@@ -4,7 +4,7 @@ import NavigationTheme from './navigation/NavigationTheme';
 import HomeNavigator from './navigation/HomeNavigator';
 import AuthNavigator from './navigation/AuthNavigator';
 import BackgroundFetch from "react-native-background-fetch";
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from "./auth/context";
 import AppleHealthKit from 'rn-apple-healthkit';
 import GoogleFit, { Scopes } from 'react-native-google-fit';
@@ -46,10 +46,13 @@ const App = ({ navigation }) => {
   const [pickerType,setPickerType] = useState('Press to select');
   const [pickerDuration,setPickerDuration] = useState('Press to select');
   const [pickerIntensity,setPickerIntensity] = useState('Press to select');
-  const [isDatePicker,setIsDatePicker] = useState(false);
+  const [pickerDate,setPickerDate] = useState('Press to select');
+  const [isDatePicker,setIsDatePicker] = useState(true);
   const [completedActivity,setCompletedActivity] = useState([{"id": " ","activityType": " ","userId": " ","duration": 0,"startTime": "2021-02-15T11:52:38","intensity": "low","uploadedTime": "2021-02-15T10:52:39.42"}]);
-  const [allActivities,setAllActivities] = useState([ {"type": "No Activities","number": 0,"starpoints": 0} ]);
+  const [allActivities,setAllActivities] = useState(["Aerobics", "Badminton", "Basketball", "Bicycling", "Bowling", "Dance", "Football/soccer", "Golf", "Gymnastics", "Handball", "Hockey", "Ice skate", "Martial arts", "Pilates", "Ping pong", "Rowing", "Running", "Skateboard", "Spinning", "Squash", "Swimming", "Tennis", "Volleyball", "Wrestling", "Yoga"]);
   const [challenges,setChallenges] = useState();
+  const [isLoading,setIsLoading] = useState(false);
+
 
   const fetchMeconfig = {
     MembershipUrl: 'https://boostapp-membership-api-test.azurewebsites.net',
@@ -59,9 +62,6 @@ const App = ({ navigation }) => {
     starPointUrl: 'https://starpoint.azurewebsites.net',
     activityUrl: 'https://boostappactivityapi.azurewebsites.net'
   }
-
-
-
 
 // Fetch in Background
   let taskId = 'com.transistorsoft.fetch'
@@ -92,10 +92,12 @@ const App = ({ navigation }) => {
 // RestoreSigmaToken
 const restoreToken = async () => {
 
+  setIsLoading(true);
+
 try {
   
   console.log('restoreToken');
-  var tokenValue = await AsyncStorage.getItem('access_token_sigma');
+  var tokenValue = await AsyncStorage.getItem('@access_token_sigma');
   if(tokenValue.type === 'error' || !tokenValue)  { console.log('! tokenValue');    setAzureToken(null); return null };
   var decoded = jwt_decode(tokenValue);
   let authState = JSON.parse( String(JSON.stringify(decoded)) );
@@ -115,13 +117,16 @@ try {
         grant_type      :   'refresh_token',
         returnUrl: 'se.sigma.BoostApp20://redirect',
       };
-      const nToken = await getToken(azureCode, azureAdAppProps);
+
+      var azorecode = await AsyncStorage.getItem('@azore_code');
+      const nToken = await getToken(azorecode, azureAdAppProps);
       console.log('there is refreshed token: ',nToken);
       let sToken = String(JSON.stringify(nToken.access_token));
       let finalToken = sToken.substring(1, sToken.length-1);
-      await AsyncStorage.setItem('access_token_sigma', finalToken );
+      console.log('token after refresh: ',finalToken);
+      await AsyncStorage.setItem('@access_token_sigma', finalToken );
       setAzureToken( finalToken );
-
+      setIsLoading(false);
       return finalToken;
 
    } 
@@ -129,15 +134,15 @@ try {
     {
       console.log("Restored Token: ",tokenValue);
       setAzureToken(tokenValue);
-
+      setIsLoading(false);
       return tokenValue;
     } 
   }
 
 } catch (error) {
-
   console.log('restoreToken error : ',error);
   setAzureToken(null);
+  setIsLoading(false);
   return null;
   
 }
@@ -188,6 +193,7 @@ const getToken = async (code, props) => {
 };
 
   useEffect(() => {
+    restoreToken();
 
     const init = async () => {
       // …do multiple sync or async tasks
@@ -204,7 +210,6 @@ try {
 
       console.log('fonts loaded')
 
-      restoreToken();
 
     };
    
@@ -238,6 +243,7 @@ useEffect(() => {
   fetchPhoto();
   fetchMyTeamMembers();
   fetchCompletedActivity();
+
   fetchAllActivities();
 
 },[azureToken]);
@@ -539,12 +545,8 @@ let dateStartToday = Year+'-'+Month+'-'+Day+'T00:00:00.000Z'
 // Fetch all consests
 const fetchCompetitions = async() => {
 
-let Month = new Date().getMonth()  
-let Year = new Date().getFullYear().toString()
-
   try {
-    const response = await fetch(`${fetchMeconfig.competitionUrl}/competition/date/${Month<=9 ?  '2020-02-15' : '2020-02-15'}`, {
-   /*  const response = await fetch(`${fetchMeconfig.competitionUrl}/competition/date/${Month<=9 ? Year+'-0'+Month.toString()+'-01' : Year+'-'+Month.toString()+'-01'}`, { */
+    const response = await fetch(`${fetchMeconfig.MembershipUrl}/Membership/me/team`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -556,7 +558,6 @@ let Year = new Date().getFullYear().toString()
     } else {
       let result = await response.json();
       setCompetitions(result);
-      setLastCompetition(result[0]);
       console.log('fetchCompetitions : ',result)
       return result;
     }
@@ -656,10 +657,12 @@ return (
     pickerType,setPickerType,
     pickerDuration,setPickerDuration,
     pickerIntensity,setPickerIntensity,
+    pickerDate,setPickerDate,
     isDatePicker,setIsDatePicker,
     completedActivity,setCompletedActivity,
     allActivities,setAllActivities,
-    challenges,setChallenges
+    challenges,setChallenges,
+    isLoading,setIsLoading
     }} >
   <NavigationContainer theme={ NavigationTheme } >
   { azureToken ? <HomeNavigator /> : <AuthNavigator /> }

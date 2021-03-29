@@ -14,4 +14,22 @@ export const DarkGray='#9c9c9c';
 export const LightGray='#E3E3E3';
 
 export const LoginColor= '#6dbecf';
-export const BGColor= '#5A1F9F';
+
+
+
+// COLORS //
+export const Blure= '#6dbecf';
+export const MenuBG= '#6dbecf';
+export const MenuIcons= '#6dbecf';
+export const Stripe= '#6dbecf';
+export const Step= '#6dbecf';
+export const StarPoint= '#6dbecf';
+export const ButtonBG= '#6dbecf';
+export const ButtonText= '#6dbecf';
+export const Title= '#6dbecf';
+export const TextDark= '#000000';
+export const TextLight= '#6dbecf';
+export const Transparency= 0.6;
+
+
+

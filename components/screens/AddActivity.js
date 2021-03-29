@@ -37,6 +37,7 @@ const {
     pickerType,setPickerType,
     pickerDuration,setPickerDuration,
     pickerIntensity,setPickerIntensity,
+    pickerDate,setPickerDate,
     isDatePicker,setIsDatePicker,
     myTeam,setMyTeam,
     completedActivity,setCompletedActivity,
@@ -98,6 +99,8 @@ if( pickerDuration == 'Press to select' || pickerDuration == null )
   return null;
 }
 let timeNow = moment().format().toString().substring(0,19)+'.000Z';
+
+//let timeNow = pickerDate.toString().substring(0,24)+'.000Z';
 let durationNum = parseInt(pickerDuration)
 console.log(typeof durationNum)
 console.log(pickerType, pickerDuration,pickerIntensity, timeNow)
@@ -314,6 +317,18 @@ visible={modalVisible}
 <AppIcon name='arrow-down' color={AppColor.Primary3} size={-4} />
 </TouchableOpacity>
 
+<View  style={styles.title} >
+<AppIcon name='clock' color={AppColor.Secondary2} size={-14} />
+<AppText.Text6 color={AppColor.Secondary2} > Date and Time</AppText.Text6>
+</View>
+
+<TouchableOpacity
+  onPress = { () => { setIsDatePicker(true), setPickerActive(true) }}
+  style={styles.button}
+>
+<AppText.Text5 color={AppColor.Primary3} >{pickerDate ? pickerDate.toString().substring(0,24) : 'Press to select' }   </AppText.Text5>
+<AppIcon name='arrow-down' color={AppColor.Primary3} size={-4} />
+</TouchableOpacity>
 
 
 <View  style={styles.buttons} >
@@ -326,14 +341,46 @@ visible={modalVisible}
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress = { () => {setPickerType('Press to select'),setPickerDuration('Press to select'),setPickerIntensity('Press to select')} }
+  onPress = { () => {setPickerType('Press to select'),setPickerDuration('Press to select'),setPickerIntensity('Press to select'),setPickerDate('Press to select')} }
   style={styles.clearbutton}
 >
 <AppText.Text6 color={AppColor.WhiteColor} >Clear -</AppText.Text6>
 </TouchableOpacity>
 
 <TouchableOpacity
-  onPress = { () => { isEditActivity ? editActivity() : addActivity() } }
+  onPress = { () => { isEditActivity ?
+    
+
+    Alert.alert(
+      "Are you Sure",
+      "(edit this activity)",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Edit", onPress: () => editActivity() }
+      ]
+    )
+     :
+     Alert.alert(
+      "Are you Sure",
+      "(add this activity)",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Add", onPress: () =>
+        {addActivity(),setPickerType('Press to select'),setPickerDuration('Press to select'),setPickerIntensity('Press to select'),setPickerDate('Press to select')}
+      }
+      ]
+    )
+     
+  
+  } }
   style={styles.addbutton}
 >
 <AppText.Text6 color={AppColor.WhiteColor} >{isEditActivity ? 'Edit Activity' : 'Add Activity'} +</AppText.Text6>

@@ -30,7 +30,7 @@ return (
 {/* Header 1 content */}
 
 <View style={styles.content}>
-<AppIcon name='odium' size={15} color={AppColor.WhiteColor}/>
+<AppIcon name='podium' size={15} color={AppColor.WhiteColor}/>
 <AppText.Text2> Competetion </AppText.Text2>
 </View>
 

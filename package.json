@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "~1.12.0",
+    "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/picker": "^1.8.1",
     "@react-navigation/bottom-tabs": "^5.11.8",
@@ -35,6 +35,7 @@
     "react-native-background-fetch": "^3.1.0",
     "react-native-bootsplash": "^3.1.5",
     "react-native-code-push": "^6.4.1",
+    "react-native-date-picker": "^3.2.10",
     "react-native-fast-image": "^8.3.4",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-google-fit": "^0.16.2",

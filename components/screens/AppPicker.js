@@ -1,14 +1,13 @@
 import React, {useEffect, useState, useContext} from 'react';
-import { View, Button, Text, Modal, StyleSheet, TextInput, TouchableHighlight, ImageBackground ,TouchableOpacity} from 'react-native';
-import {AppColor} from '../styles';
-import * as AppText  from '../styles/AppText';
+import { View,Modal,TouchableOpacity} from 'react-native';
+import {AppColor, AppStyle} from '../styles';
 import AppIcon from '../../Assets/Icons/icons';
 
 import AuthContext from '../../auth/context';
 import {Picker} from '@react-native-community/picker';
 import moment from 'moment';
 
-
+import DatePicker from 'react-native-date-picker';
 
 export default AppPicker = () => {
 
@@ -20,6 +19,7 @@ const {
     pickerType,setPickerType,
     pickerDuration,setPickerDuration,
     pickerIntensity,setPickerIntensity,
+    pickerDate,setPickerDate,
     isDatePicker,setIsDatePicker,
   } = useContext(AuthContext);
 
@@ -31,7 +31,12 @@ const {
   
   let dateStartToday = year1+'-'+month1+'-'+day1+info
 
+  var min = new Date(year1+"-01-01");
+  var max = new Date(year1+"-12-31");
+
 const [val, setVal] = useState(null);
+const [date, setDate] = useState(new Date())
+
 /* 
 const [year, setYear] = useState( day1 ||'2021');
 const [month, setMonth] = useState( month1 ||'12');
@@ -55,50 +60,41 @@ width: '100%',
 height: '100%',
 justifyContent: 'center',
 backgroundColor: 'rgba(100,100,100, 0)',
-padding: 20,
+padding: AppStyle.hh / 50,
 }}
 >
 
 
 <View style={{borderRadius:30,backgroundColor:'white',
-width:'110%',height:'30%',opacity:0.96,
-position:'absolute',bottom:-40,
-alignItems:'center',alignSelf:'center',
-shadowColor: "#000",paddingVertical:20,marginVertical:20,
+width:'110%',height:'40%',
+position:'absolute',bottom:-AppStyle.hh / 20,
+alignItems:'center',alignSelf:'center',justifyContent: isDatePicker ? 'flex-start' : 'flex-end',
+shadowColor: "#000",
 shadowOffset: { width: 0,height: 11},
 shadowOpacity: 0.55, shadowRadius: 14.78, elevation: 22,
 }}
 onPress={() => setPickerActive(false)}>
 
 
-{isDatePicker ?
+{ isDatePicker ?
 
-<View style={{flexDirection:'row'}}>
-
-
-<AppText.Text2>{year1} / </AppText.Text2>
-<AppText.Text2>{month1} / </AppText.Text2>
-
-    <TextInput
-    style={{width:80, height:30, borderColor:'red', borderWidth:1, textAlign:'center',marginVertical:10}}
-    placeholder="Type here to translate!"
-    onChangeText={text => setDay(text)}
-    defaultValue={day1}
-  />
-
-</View>
+<DatePicker
+date={date}
+mode="datetime"
+textColor={AppColor.TextDark}
+onDateChange={setPickerDate}
+/>
 
     :
 
 <Picker
 selectedValue={val}
-style={{height: 100, width: '100%', justifyContent:'center',
+style={{height: AppStyle.hh / 2, width: '100%', justifyContent:'center',
 marginVertical:10}}
 onValueChange={(value, itemIndex) =>
 {
 setVal(value)
 {
-
   if ( ["low","medium","high"].includes(value) ) setPickerIntensity(value)
   else if( ["30","60","90","120","150","180"].includes(value) ) setPickerDuration(value)
   else setPickerType(value)
@@ -122,9 +118,9 @@ console.log("pickerIntensity: ",pickerIntensity)
 
 
 <TouchableOpacity onPress={ () => setPickerActive(false) }
-style={{alignItems:'center', justifyContent:'center'}} >
+style={{alignItems:'center', justifyContent:'center',position:'absolute',bottom:AppStyle.hh / 10}} >
 
-<AppIcon name='check-circle' color={AppColor.Secondary2} size={4} />
+<AppIcon name='check-circle' color={AppColor.Secondary2} size={10} />
 
 </TouchableOpacity>
 
