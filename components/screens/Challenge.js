@@ -37,12 +37,12 @@ return (
       <AppIcon name='star' size={-12} color={AppColor.WhiteColor}/>
       </View>
       <View style={styles.flagtitle}>
-      <AppText.Text5 color={AppColor.WhiteColor} >{ challenges ? challengeTitle : 'No Challenge'}</AppText.Text5>
+      <AppText.Text3 color={AppColor.WhiteColor} >{ challenges ? challengeTitle : 'No Challenge'}</AppText.Text3>
       <AppText.Text6 color={AppColor.WhiteColor} >{ challenges ? challengeDescription : 'No Description'}</AppText.Text6>
       </View>
       <TouchableOpacity style={styles.flagbutton}>
-      <AppText.Text5 color={AppColor.WhiteColor} > Start </AppText.Text5>
-      <AppIcon name='play-circle' size={-14} color={AppColor.WhiteColor}/>
+      <AppText.Text5 color={AppColor.WhiteColor} > STOP  </AppText.Text5>
+      <AppIcon name='pause-circle' size={-14} color={AppColor.WhiteColor}/>
       </TouchableOpacity>
 </View>
 
@@ -104,6 +104,6 @@ flagbutton: {
   alignItems:'center',
   position:'absolute',
   bottom:0,
-  backgroundColor: AppColor.Secondary,
+  backgroundColor: AppColor.ButtonBG,
 },
 });

@@ -17,18 +17,24 @@ export const LoginColor= '#6dbecf';
 
 
 
-// COLORS //
-export const Blure= '#6dbecf';
-export const MenuBG= '#6dbecf';
-export const MenuIcons= '#6dbecf';
-export const Stripe= '#6dbecf';
-export const Step= '#6dbecf';
-export const StarPoint= '#6dbecf';
-export const ButtonBG= '#6dbecf';
-export const ButtonText= '#6dbecf';
-export const Title= '#6dbecf';
-export const TextDark= '#000000';
-export const TextLight= '#6dbecf';
+// COLORSs //
+export const Blure= '#CCA2F4';
+export const MenuBG= '#000000';
+export const MenuIcons= '#CCA2F4';
+export const Stripe= '#CCA2F4';
+export const Step= '#CCA2F4';
+export const StarPoint= '#FF885B';
+export const ButtonBG= '#341560';
+export const Title= '#341560';
+export const TextDark= '#341560';
+export const TextLight= '#CCA2F4';
+
+export const InputBG= '#EAE1F9';
+export const InputBorder= '#341560';
+
+export const Border= '#ffffff';
+
+
 export const Transparency= 0.6;
 
 

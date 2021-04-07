@@ -35,6 +35,9 @@ return (
           style={styles.blurebg}
           source={require('../Assets/images/blure.png')} >
       </FastImage>
+
+<View style={styles.header1overlay} />
+
    
 {/* Header 1 content */}
 
@@ -85,8 +88,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.BlackColor,
-    opacity:0.7
+    backgroundColor: AppColor.Blure,
+    opacity: AppColor.Transparency
   },
   header2: {
     height: AppStyle.hh * 0.10,
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
     height: '100%',
     position:'absolute',
     backgroundColor: AppColor.Secondary2,
-    opacity: 0.7
+    opacity: AppColor.Transparency
   },
   content:{
     position:'absolute',

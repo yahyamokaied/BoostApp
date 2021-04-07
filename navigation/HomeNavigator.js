@@ -22,10 +22,10 @@ const AppNavigator = () => (
     <Tab.Navigator mode="modal" screenOptions={{headerShown: false}} initialRouteName="HomeScreen"
     tabBarOptions={
       {
-        activeTintColor: AppColor.Secondary2,
+        activeTintColor: AppColor.MenuIcons,
         inactiveTintColor: AppColor.WhiteColor,
-        activeBackgroundColor: '#2b2b2a',
-        inactiveBackgroundColor: '#2b2b2a',
+        activeBackgroundColor: AppColor.MenuBG,
+        inactiveBackgroundColor: AppColor.MenuBG,
         labelStyle: {
           paddingBottom: AppStyle.hh / 200,
         },
@@ -84,14 +84,9 @@ const styles = StyleSheet.create({
     width:11,
     height:11,
     borderRadius:10,
-    backgroundColor:AppColor.Secondary2,
+    backgroundColor:AppColor.MenuIcons,
     position:'absolute',
     right:-7,
     top:2
-  },
-  blure: {
-    width:'100%',
-    height:'100%',
-    backgroundColor:'red'
   }
 })

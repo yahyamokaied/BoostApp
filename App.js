@@ -1,20 +1,22 @@
 import React, {useEffect,useState} from 'react';
+import { LogBox } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
-import NavigationTheme from './navigation/NavigationTheme';
 import HomeNavigator from './navigation/HomeNavigator';
 import AuthNavigator from './navigation/AuthNavigator';
+import NavigationTheme from './navigation/NavigationTheme';
+
 import BackgroundFetch from "react-native-background-fetch";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthContext from "./auth/context";
+
 import AppleHealthKit from 'rn-apple-healthkit';
 import GoogleFit, { Scopes } from 'react-native-google-fit';
-import { LogBox } from 'react-native';
 import moment from 'moment';
-import codePush from "react-native-code-push";
-import jwt_decode from "jwt-decode";
-import * as AuthSession from 'expo-auth-session';
 import RNBootSplash from "react-native-bootsplash";
-import { useFonts } from 'expo-font';
+import jwt_decode from "jwt-decode";
+
+import { fetchMeconfig, azureAdAppProps, checkIfTokenExpired, getToken } from './components/functions/APIFunctions';
 
 LogBox.ignoreAllLogs();
 
@@ -53,16 +55,6 @@ const App = ({ navigation }) => {
   const [challenges,setChallenges] = useState();
   const [isLoading,setIsLoading] = useState(false);
 
-
-  const fetchMeconfig = {
-    MembershipUrl: 'https://boostapp-membership-api-test.azurewebsites.net',
-    competitionUrl: 'https://boostappcompetitionapi.azurewebsites.net',
-    challengeUrl: 'https://boostapp-challenge-api.azurewebsites.net',
-    stepUrl: 'https://boostappstepapi.azurewebsites.net',
-    starPointUrl: 'https://starpoint.azurewebsites.net',
-    activityUrl: 'https://boostappactivityapi.azurewebsites.net'
-  }
-
 // Fetch in Background
   let taskId = 'com.transistorsoft.fetch'
       useEffect(() => {
@@ -72,7 +64,7 @@ const App = ({ navigation }) => {
           stopOnTerminate: false,
           startOnBoot: true,
         }, async (taskId) => {
-          // Tasks will fetch every 15 mint is here
+// Tasks will fetch every 15 mint is here
           Platform.select ({
             ios: () => {
               getStepsIOS ();
@@ -95,48 +87,48 @@ const restoreToken = async () => {
   setIsLoading(true);
 
 try {
-  
-  console.log('restoreToken');
-  var tokenValue = await AsyncStorage.getItem('@access_token_sigma');
-  if(tokenValue.type === 'error' || !tokenValue)  { console.log('! tokenValue');    setAzureToken(null); return null };
-  var decoded = jwt_decode(tokenValue);
-  let authState = JSON.parse( String(JSON.stringify(decoded)) );
-  if(!authState) { console.log('! authState');   setAzureToken(null); return null };
-  if (authState) {
-    console.log('there is authState: ',authState);
-    if (checkIfTokenExpired(authState))
-    { 
-       const azureAdAppProps = {
-        clientId        :   '0ba22465-fda2-483d-98fe-f9ee6dd5d2cd',
-        tenantId        :   'f82b0fb7-0101-410d-8e87-0efa7c1d3978',
-        scope           :   ['user.read'],
-        domainHint      :   'login.microsoftonline.com',
-        redirectUrl     :   AuthSession.makeRedirectUri({ native:'se.sigma.BoostApp20://redirect'}),
-        clientSecret    :   'DiGF4Yz6D_4A1.DB5QJ-I6yQz6-_5V55nI',
-        prompt          :   'login',
-        grant_type      :   'refresh_token',
-        returnUrl: 'se.sigma.BoostApp20://redirect',
-      };
+// Check if there is old sigma token on device
 
-      var azorecode = await AsyncStorage.getItem('@azore_code');
-      const nToken = await getToken(azorecode, azureAdAppProps);
-      console.log('there is refreshed token: ',nToken);
-      let sToken = String(JSON.stringify(nToken.access_token));
-      let finalToken = sToken.substring(1, sToken.length-1);
-      console.log('token after refresh: ',finalToken);
-      await AsyncStorage.setItem('@access_token_sigma', finalToken );
-      setAzureToken( finalToken );
-      setIsLoading(false);
-      return finalToken;
-
-   } 
-     else
+    console.log('restoreToken');
+    var tokenValue = await AsyncStorage.getItem('@access_token_sigma');
+    if(tokenValue.type === 'error' || !tokenValue)
     {
-      console.log("Restored Token: ",tokenValue);
-      setAzureToken(tokenValue);
-      setIsLoading(false);
-      return tokenValue;
-    } 
+      console.log('! tokenValue');
+      setAzureToken(null); return null;
+    };
+    var decoded = jwt_decode(tokenValue);
+    let authState = JSON.parse( String(JSON.stringify(decoded)) );
+    if(!authState)
+    {
+      console.log('! authState');
+      setAzureToken(null); return null;
+    };
+    if (authState)
+    {
+      console.log('there is authState: ',authState);
+
+// Check if the sigma token expired or not
+        if (checkIfTokenExpired(authState))
+        { 
+          var azorecode = await AsyncStorage.getItem('@azore_code');
+          const nToken = await getToken(azorecode, azureAdAppProps);
+          console.log('there is refreshed token: ',nToken);
+          let sToken = String(JSON.stringify(nToken.access_token));
+          let finalToken = sToken.substring(1, sToken.length-1);
+          console.log('token after refresh: ',finalToken);
+          await AsyncStorage.removeItem('@access_token_sigma');
+          await AsyncStorage.setItem('@access_token_sigma', finalToken );
+          setAzureToken( finalToken );
+          setIsLoading(false);
+          return finalToken;
+      } 
+      else
+      {
+        console.log("Restored Token: ",tokenValue);
+        setAzureToken(tokenValue);
+        setIsLoading(false);
+        return tokenValue;
+      } 
   }
 
 } catch (error) {
@@ -144,80 +136,24 @@ try {
   setAzureToken(null);
   setIsLoading(false);
   return null;
-  
 }
-
-}
-
-
-function checkIfTokenExpired({ exp }) {
-  console.log('token exp: ',exp)
-  let time = +exp + '000';
-  return new Date(parseInt(time)) < new Date();
 }
 
 
-const getToken = async (code, props) => {
-  var requestParams = {
-    client_id: props.clientId,
-    response_type: 'code',
-    scope: 'user.read',
-    refresh_token: code,
-    redirect_uri: props.redirectUrl,
-    grant_type: 'refresh_token',
-  }
-  var formBody = [];
-  for (var p in requestParams) {
-    var encodedKey = encodeURIComponent(p);
-    var encodedValue = encodeURIComponent(requestParams[p]);
-    formBody.push(encodedKey + '=' + encodedValue);
-  }
-  formBody = formBody.join('&');
-
-  let tokenResponse = null;
-  await fetch(`https://login.microsoftonline.com/${props.tenantId}/oauth2/token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: formBody,
-  })
-  .then((response) => response.json())
-  .then((response) => {
-    tokenResponse = response;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-  return await tokenResponse;
-};
 
   useEffect(() => {
+
     restoreToken();
 
+    // functions before splashscreen
     const init = async () => {
-      // …do multiple sync or async tasks
-try {
-  const [loaded] = useFonts({
-    BWBold: require('./Assets/fonts/BWBold.otf'),
-    BWRegular: require('./Assets/fonts/BWRegular.otf'),
-    BWMedium: require('./Assets/fonts/BWMedium.otf')
-  });
-} catch (error) {
-  console.log('font load error',error)
-}
-
-
-      console.log('fonts loaded')
-
-
     };
    
 
+// hide splashscreen after loading the app
     init().finally(async () => {
       await RNBootSplash.hide({ fade: true });
       console.log("Bootsplash has been hidden successfully");
-
     });
 
 
@@ -243,126 +179,122 @@ useEffect(() => {
   fetchPhoto();
   fetchMyTeamMembers();
   fetchCompletedActivity();
-
   fetchAllActivities();
-
 },[azureToken]);
 
 const getStepsAndroid = () => {
-  const options = {
-    scopes: [
-      Scopes.FITNESS_ACTIVITY_READ,
-      Scopes.FITNESS_BODY_READ,
-    ],
-};
+        const options = {
+          scopes: [
+            Scopes.FITNESS_ACTIVITY_READ,
+            Scopes.FITNESS_BODY_READ,
+          ],
+      };
 
-GoogleFit.authorize(options)
-  .then ((res) => {
-  console.log('authorized >>>', res);
-GoogleFit.startRecording((callback) => {
-          console.log('callback >>>', callback)
-  
-          let Day = new Date().getDate().toString()
-          let Month = (new Date().getMonth()).toString()
-          let Year = new Date().getFullYear().toString()
+      GoogleFit.authorize(options)
+        .then ((res) => {
+        console.log('authorized >>>', res);
+      GoogleFit.startRecording((callback) => {
+                console.log('callback >>>', callback)
+        
+                let Day = new Date().getDate().toString()
+                let Month = (new Date().getMonth()).toString()
+                let Year = new Date().getFullYear().toString()
 
-/* startDate: "2017-01-01T00:00:17.971Z", // required ISO8601Timestamp */
-
-const options = {
-      startDate: (new Date(Year,Month,Day)).toISOString(), // required ISO8601Timestamp
-      endDate: new Date().toISOString(), // required ISO8601Timestamp
-      bucketUnit: "DAY", // optional - default "DAY". Valid values: "NANOSECOND" | "MICROSECOND" | "MILLISECOND" | "SECOND" | "MINUTE" | "HOUR" | "DAY"
-      bucketInterval: 1, // optional - default 1. 
-    };
-          
-    GoogleFit.getDailyStepCountSamples(options, (err, res) => {
-      if (err)
-      {
-      console.log('getDailyStepCountSamples: ',err)
-      return
-      }
-      console.log('getDailyStepCountSamples: ',res)
-      console.log('getDailyStepCountSamples: ',res[2].steps[0].value)
-      setDailyStepsTotal(res[2].steps[0].value)
-  })
-})
-    })
-    .catch((err) => {
-      console.log('android getDailyStepCountSamples error >>> ', err)
-    });
+      const options = {
+            startDate: (new Date(Year,Month,Day)).toISOString(), // required ISO8601Timestamp
+            endDate: new Date().toISOString(), // required ISO8601Timestamp
+            bucketUnit: "DAY", // optional - default "DAY". Valid values: "NANOSECOND" | "MICROSECOND" | "MILLISECOND" | "SECOND" | "MINUTE" | "HOUR" | "DAY"
+            bucketInterval: 1, // optional - default 1. 
+          };
+                
+          GoogleFit.getDailyStepCountSamples(options, (err, res) => {
+            if (err)
+            {
+            console.log('getDailyStepCountSamples: ',err)
+            return
+            }
+            console.log('getDailyStepCountSamples: ',res)
+            console.log('getDailyStepCountSamples: ',res[2].steps[0].value)
+            setDailyStepsTotal(res[2].steps[0].value)
+        })
+      })
+          })
+          .catch((err) => {
+            console.log('android getDailyStepCountSamples error >>> ', err)
+          });
 };
 
 
 const getStepsIOS = () => {
-  let options = {
-    permissions: {
-        read: ["StepCount"],
-        write: ["StepCount"]
-    }
-};
+      let options = {
+        permissions: {
+            read: ["StepCount"],
+            write: ["StepCount"]
+        }
+    };
 
-AppleHealthKit.initHealthKit(options, (err, results) => {
-  if (err) {
-      console.log("error initializing Healthkit: ", err);
-      return;
-  }
+    AppleHealthKit.initHealthKit(options, (err, results) => {
+      if (err) {
+          console.log("error initializing Healthkit: ", err);
+          return;
+      }
 
-  let Day = parseInt ( new Date().getDate().toString() )
-  let Month = parseInt (  new Date().getMonth().toString() )
-  let Year = parseInt (  new Date().getFullYear().toString() )
+      let Day = parseInt ( new Date().getDate().toString() )
+      let Month = parseInt (  new Date().getMonth().toString() )
+      let Year = parseInt (  new Date().getFullYear().toString() )
 
-  let options = {
-    startDate: (new Date(Year,Month,Day)).toISOString() ,
-    endDate:   (new Date()).toISOString() // optional; default now
-};
+      let options = {
+        startDate: (new Date(Year,Month,Day)).toISOString() ,
+        endDate:   (new Date()).toISOString() // optional; default now
+    };
 
- AppleHealthKit.getDailyStepCountSamples(options, async (err, results) => {
-    if (err) {
-      console.log(err)
-        return;
-    }
-    var total = 0; 
-    for(var i = 0 ; i < results.length ; i++)
-    { 
-       total = total + results[i].value
-    }
-    console.log("getDailyStepCountSamples ios",total)
-    setDailyStepsTotal(total)
-    let newTotal = parseInt( total );
-    console.log("newTotal ios",newTotal)
+    AppleHealthKit.getDailyStepCountSamples(options, async (err, results) => {
+        if (err) {
+          console.log(err)
+            return;
+        }
+        var total = 0; 
+        for(var i = 0 ; i < results.length ; i++)
+        { 
+          total = total + results[i].value
+        }
+        console.log("getDailyStepCountSamples ios",total)
+        setDailyStepsTotal(total)
+        let newTotal = parseInt( total );
+        console.log("newTotal ios",newTotal)
 
-    let oldTotal = await fetchSteps();
-    console.log("oldTotal ios",oldTotal)
+        let oldTotal = await fetchSteps();
+        console.log("oldTotal ios",oldTotal)
 
-    console.log("difTotal ios", oldTotal - newTotal)
+        console.log("difTotal ios", oldTotal - newTotal)
 
-    postSteps( oldTotal - newTotal );
-});
-});
+        postSteps( oldTotal - newTotal );
+    });
+    });
 };
 
 
 
 const fetchCompletedActivity = async() => {
-  try {
-    const response = await fetch(`${fetchMeconfig.activityUrl}/activity/user/starpoint`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + azureToken,
-      },
-    });
-    if (!response.ok) {
-      console.log("fetchCompletedActivity Error: ",response.status);
-    } else {
-      let result = await response.json();
-      console.log("fetchCompletedActivity : ",result);
-      setCompletedActivity(result)
-      return result;
+    try {
+      const response = await fetch(`${fetchMeconfig.activityUrl}/activity/user/starpoint`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + azureToken,
+        },
+      });
+      if (!response.ok) {
+        console.log("fetchCompletedActivity Error: ",response.status);
+      } else {
+        let result = await response.json();
+        console.log("fetchCompletedActivity : ",result);
+        setCompletedActivity(result)
+        return result;
+      }
+    } catch (error) {
+      console.log("fetchCompletedActivity error : ",error);
     }
-  } catch (error) {
-    console.log("fetchCompletedActivity error : ",error);
-  }
 }
 
 
@@ -671,8 +603,5 @@ return (
   );    
   };
 
-const codePushOpthions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_START
-};
 
-export default codePush(codePushOpthions) (App);
+export default App;

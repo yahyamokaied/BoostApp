@@ -75,11 +75,11 @@ return (
         style={styles.img}
         source={ photo ? { uri:photo } : require('../Assets/images/team.png') }
 />
-<AppText.Text5 color={AppColor.BlackColor}>{name ? name : 'Team Member Name'} </AppText.Text5>
+<AppText.Text5 color={AppColor.TextDark}>{name ? name : 'Team Member Name'} </AppText.Text5>
 <View style={styles.starpoint2}>
-<AppText.Text3 color={AppColor.Secondary2} >{ starPoints ? starPoints : '0'}</AppText.Text3>
+<AppText.Text3 color={AppColor.StarPoint} >{ starPoints ? starPoints : '0'}</AppText.Text3>
 <View style={styles.icon}>
-<AppIcon name='star' size={-10} color={AppColor.Secondary2}/>
+<AppIcon name='star' size={-10} color={AppColor.StarPoint}/>
 </View>
 </View>
 
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     height: '100%',
     position:'absolute',
     backgroundColor: AppColor.BlackColor,
-    opacity:0.7
+    opacity: AppColor.Transparency
   },
   header2: {
     height: AppStyle.hh * 0.10,
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.Secondary2,
-    opacity: 0.7
+    backgroundColor: AppColor.Stripe,
+    opacity: AppColor.Transparency
   },
   content1:{
     position:'absolute',
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     top:AppStyle.hh / 40,
     right:0,
     backgroundColor: AppColor.BlackColor,
-    opacity:0.6
+    opacity: AppColor.Transparency
   },
   flagtitle: {
     width: '100%',
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom: AppStyle.hh * 0.036,
     backgroundColor: AppColor.BlackColor,
-    opacity:0.6
+    opacity: AppColor.Transparency
   },
   flagbutton: {
     flexDirection:'row',
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     width: (AppStyle.hh + AppStyle.ww) * 0.05  ,
     height: (AppStyle.hh + AppStyle.ww) * 0.05  ,
     borderRadius: (AppStyle.hh + AppStyle.ww) * 0.025,
-    borderColor:AppColor.Primary2,
+    borderColor:AppColor.Border,
     borderWidth: 1,
     marginVertical:AppStyle.hh * 0.01
   },
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderWidth:1,
-    borderColor: AppColor.Secondary2,
+    borderColor: AppColor.StarPoint,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
   },
   icon: {

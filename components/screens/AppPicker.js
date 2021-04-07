@@ -120,7 +120,7 @@ console.log("pickerIntensity: ",pickerIntensity)
 <TouchableOpacity onPress={ () => setPickerActive(false) }
 style={{alignItems:'center', justifyContent:'center',position:'absolute',bottom:AppStyle.hh / 10}} >
 
-<AppIcon name='check-circle' color={AppColor.Secondary2} size={10} />
+<AppIcon name='check-circle' color={AppColor.ButtonBG} size={10} />
 
 </TouchableOpacity>
 

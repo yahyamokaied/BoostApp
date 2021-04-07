@@ -27,6 +27,7 @@ return (
           source={require('../Assets/images/blure.png')} >
       </FastImage>
    
+   
 {/* Header 1 content */}
 
 <View style={styles.content}>
@@ -44,7 +45,6 @@ return (
         </FastImage>
     <View style={styles.header2overlay} />
 
-        
 {/* Header 2 content */}
 
 <View style={styles.content1}>
@@ -60,26 +60,39 @@ return (
 {/* Body content */}
 <View style={styles.content2}>
 
+<View style={styles.stepspic}>
+<FastImage
+            style={styles.stepsbg}
+            source={require('../Assets/images/steps.png')} >
+</FastImage>
 
-<AppText.Text5 color={AppColor.Primary4} > Steps of the Day </AppText.Text5>
+<View style={styles.txt1}>
+<AppText.Text5 color={AppColor.Step} > Steps of the Day </AppText.Text5>
+</View>
 
-<View style={styles.steps}>
-<AppText.Text1 color={AppColor.Primary4} >{ dailyStepsTotal ? dailyStepsTotal : '0'}</AppText.Text1>
+<View style={styles.txt2}>
+<AppText.Text5 color={AppColor.StarPoint} > StarPoints </AppText.Text5>
+</View>
+
+<View style={styles.stepsnew}>
+<AppText.Text1 color={AppColor.Step} >{ dailyStepsTotal ? dailyStepsTotal : '0'}</AppText.Text1>
 <View style={styles.icon}>
-<AppIcon name='run' size={8} color={AppColor.Primary4}/>
+<AppIcon name='run' size={8} color={AppColor.Step}/>
 </View>
 </View>
 
-<AppText.Text5 color={AppColor.Secondary2} > StarPoints </AppText.Text5>
 
-<View style={styles.starpoint}>
-<AppText.Text1 color={AppColor.Secondary2} >{ starPoints ? starPoints : '0'}</AppText.Text1>
+<View style={styles.starpointnew}>
+<AppText.Text1 color={AppColor.StarPoint} >{ starPoints ? starPoints : '0'}</AppText.Text1>
 <View style={styles.icon}>
-<AppIcon name='star' size={5} color={AppColor.Secondary2}/>
+<AppIcon name='star' size={5} color={AppColor.StarPoint}/>
 </View>
 </View>
 
-<AppText.Text3 color={AppColor.BlackColor} > Active Challenges </AppText.Text3>
+
+</View>
+
+<AppText.Text3 color={AppColor.Title} > Active Challenges </AppText.Text3>
 
 <View style={styles.challenge}>
     <FastImage
@@ -94,8 +107,8 @@ return (
       <AppText.Text6 color={AppColor.WhiteColor} > Challenge Title </AppText.Text6>
       </View>
       <TouchableOpacity style={styles.flagbutton}>
-      <AppText.Text5 color={AppColor.WhiteColor} > Done </AppText.Text5>
-      <AppIcon name='pause-circle' size={-14} color={AppColor.WhiteColor}/>
+      <AppText.Text5 color={AppColor.WhiteColor} > START </AppText.Text5>
+      <AppIcon name='play-circle' size={-14} color={AppColor.WhiteColor}/>
       </TouchableOpacity>
 </View>
 
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
     height: '100%',
     position:'absolute',
     backgroundColor: AppColor.BlackColor,
-    opacity:0.7
+    opacity: AppColor.Transparency
   },
   header2: {
     height: AppStyle.hh * 0.10,
@@ -139,8 +152,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.Secondary2,
-    opacity: 0.7
+    backgroundColor: AppColor.Stripe,
+    opacity: AppColor.Transparency
   },
   content1:{
     flexDirection:'column',
@@ -166,11 +179,57 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderWidth:1,
-    borderColor: AppColor.Primary4,
+    borderColor: AppColor.Step,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
     marginTop: AppStyle.hh * 0.005,
     marginBottom: AppStyle.hh * 0.01
     },
+    stepsbg: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'contain',
+    },
+    stepsnew:{
+      width: AppStyle.ww * 0.3,
+      height: AppStyle.hh * 0.05,
+      flexDirection:'row',
+      alignSelf:'center',
+      justifyContent:'center',
+      alignItems:'center',
+      borderWidth:1,
+      borderColor: AppColor.Step,
+      borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
+      marginTop: AppStyle.hh * 0.005,
+      marginBottom: AppStyle.hh * 0.01,
+      position:'absolute',
+      right:AppStyle.ww / 8,
+      top: AppStyle.hh / 32
+      },
+      starpointnew : {
+        width: AppStyle.ww * 0.3,
+        height: AppStyle.hh * 0.05,
+        flexDirection:'row',
+        alignSelf:'center',
+        justifyContent:'center',
+        alignItems:'center',
+        borderWidth:1,
+        borderColor: AppColor.StarPoint,
+        borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
+        marginTop: AppStyle.hh * 0.005,
+        marginBottom: AppStyle.hh * 0.01,
+        position:'absolute',
+        right:AppStyle.ww / 8,
+        top: AppStyle.hh / 8.5
+      },
+    stepspic:{
+      width: AppStyle.ww * 0.85,
+      height: AppStyle.hh * 0.2,
+      flexDirection:'row',
+      alignSelf:'center',
+      justifyContent:'center',
+      alignItems:'center',
+      marginBottom: AppStyle.hh * 0.01
+      },
     starpoint: {
       width: AppStyle.ww * 0.45,
       height: AppStyle.hh * 0.06,
@@ -179,7 +238,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       borderWidth:1,
-      borderColor: AppColor.Secondary2,
+      borderColor: AppColor.StarPoint,
       borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
       marginTop: AppStyle.hh * 0.005,
       marginBottom: AppStyle.hh * 0.025
@@ -209,7 +268,7 @@ const styles = StyleSheet.create({
       top:AppStyle.hh / 40,
       right:0,
       backgroundColor: AppColor.BlackColor,
-      opacity:0.6
+      opacity: AppColor.Transparency
     },
     flagtitle: {
       width: '100%',
@@ -219,7 +278,7 @@ const styles = StyleSheet.create({
       position:'absolute',
       bottom: AppStyle.hh * 0.042,
       backgroundColor: AppColor.BlackColor,
-      opacity:0.6
+      opacity: AppColor.Transparency
     },
     flagbutton: {
       flexDirection:'row',
@@ -229,11 +288,43 @@ const styles = StyleSheet.create({
       alignItems:'center',
       position:'absolute',
       bottom:0,
-      backgroundColor: AppColor.Secondary,
+      backgroundColor: AppColor.ButtonBG,
     },
   body: {
     flex:1,
     alignItems:'center',
     backgroundColor: AppColor.WhiteColor
+  },
+  txt1:{
+    width:'100%',
+    position:'absolute',
+    top: AppStyle.hh / 120,
+    left: AppStyle.ww / 7
+  },
+  txt2:{
+    width:'100%',
+    position:'absolute',
+    top: AppStyle.hh / 10.5,
+    left: AppStyle.ww / 7
   }
 });
+
+
+
+{/* <AppText.Text5 color={AppColor.Step} > Steps of the Day </AppText.Text5>
+
+<View style={styles.steps}>
+<AppText.Text1 color={AppColor.Step} >{ dailyStepsTotal ? dailyStepsTotal : '0'}</AppText.Text1>
+<View style={styles.icon}>
+<AppIcon name='run' size={8} color={AppColor.Step}/>
+</View>
+</View>
+
+<AppText.Text5 color={AppColor.StarPoint} > StarPoints </AppText.Text5>
+
+<View style={styles.starpoint}>
+<AppText.Text1 color={AppColor.StarPoint} >{ starPoints ? starPoints : '0'}</AppText.Text1>
+<View style={styles.icon}>
+<AppIcon name='star' size={5} color={AppColor.StarPoint}/>
+</View>
+</View> */}

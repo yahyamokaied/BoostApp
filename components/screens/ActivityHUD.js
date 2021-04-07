@@ -186,16 +186,16 @@ return (
   setPickerIntensity(activityIntensity)
 }  }
 >
-<AppIcon name={checkIcon(activityName)} size={-10} color={AppColor.BlackColor}/>
-<AppText.Text6 color={AppColor.BlackColor} >{completedActivity ? activityName : 'No Activities'}</AppText.Text6>
+<AppIcon name={checkIcon(activityName)} size={-10} color={AppColor.MenuIcons}/>
+<AppText.Text6 color={AppColor.TextDark} >{completedActivity ? activityName : 'No Activities'}</AppText.Text6>
 
-<AppText.Text6 color={AppColor.BlackColor} >{completedActivity ? activityDuration : '0'} min</AppText.Text6>
+<AppText.Text6 color={AppColor.TextDark} >{completedActivity ? activityDuration : '0'} min</AppText.Text6>
 
 <View  style={styles.starts}>
-<AppText.Text6 color={AppColor.WhiteColor} >{activityStarpoint ? activityStarpoint : '0'}</AppText.Text6>
+<AppText.Text6 color={AppColor.WhiteColor} >{activityStarpoint ? activityStarpoint : '0'} </AppText.Text6>
 <AppIcon name='star' size={-16} color={AppColor.WhiteColor}/>
 </View>
-<AppText.Text6 color={AppColor.BlackColor} >{activityDate ? activityDate : 'No Date'}</AppText.Text6>
+<AppText.Text6 color={AppColor.TextDark} >{activityDate ? activityDate : 'No Date'}</AppText.Text6>
 
 <TouchableOpacity onPress={() =>
 
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: AppColor.Secondary2,
+    backgroundColor: AppColor.StarPoint,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.008,
   }
 });

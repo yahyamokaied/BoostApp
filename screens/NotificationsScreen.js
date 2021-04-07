@@ -22,7 +22,7 @@ return (
           style={styles.blurebg}
           source={require('../Assets/images/blure.png')} >
       </FastImage>
-{/*       <View style={styles.header1overlay} />*/}
+      <View style={styles.header1overlay} />
 {/* Header 1 content */}
 
 <View style={styles.content}>
@@ -37,10 +37,10 @@ return (
 {/* Body content */}
 
 <View style={styles.content3}>
-<AppIcon name='bell' size={-10} color={AppColor.Secondary2}/>
+<AppIcon name='bell' size={-10} color={AppColor.ButtonBG}/>
 <View style={styles.message}>
 
-<AppText.Text6 color={AppColor.BlackColor}> 5 Challenges added recently </AppText.Text6>
+<AppText.Text6 color={AppColor.TextDark}> 5 Challenges added recently </AppText.Text6>
 </View>
 </View>
 
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.BlackColor,
-    opacity:0.7
+    backgroundColor: AppColor.Stripe,
+    opacity: AppColor.Transparency
   },
   header2: {
     height: AppStyle.hh * 0.10,
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.Secondary2,
-    opacity: 0.7
+    backgroundColor: AppColor.MenuIcons,
+    opacity: AppColor.Transparency
   },
   content:{
     position:'absolute',
@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
       message:{
         flex:1,
         alignItems:'center',
-        borderColor:AppColor.Secondary2,
+        borderColor:AppColor.ButtonBG,
+        backgroundColor: AppColor.InputBG,
         borderWidth:0.4,
         paddingHorizontal:AppStyle.ww * 0.05,
         marginHorizontal:AppStyle.ww * 0.05,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     top:AppStyle.hh / 40,
     right:0,
     backgroundColor: AppColor.BlackColor,
-    opacity:0.6
+    opacity: AppColor.Transparency
   },
   flagtitle: {
     width: '100%',
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom: AppStyle.hh * 0.036,
     backgroundColor: AppColor.BlackColor,
-    opacity:0.6
+    opacity: AppColor.Transparency
   },
   flagbutton: {
     flexDirection:'row',
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     position:'absolute',
     bottom:0,
-    backgroundColor: AppColor.Secondary2,
+    backgroundColor: AppColor.MenuIcons,
   },
   body: {
     flex:1,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderWidth:1,
-    borderColor: AppColor.Secondary2,
+    borderColor: AppColor.ButtonBG,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
   },
   icon: {

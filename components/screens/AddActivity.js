@@ -275,11 +275,11 @@ visible={modalVisible}
 <View style={styles.container}>
 
 <View>
-<AppText.Text3 color={AppColor.Primary} >{isEditActivity ? 'Edit Activity' : 'Add Activity'}</AppText.Text3>
+<AppText.Text3 color={AppColor.Title} >{isEditActivity ? 'Edit Activity' : 'Add Activity'}</AppText.Text3>
 
 <View  style={styles.title} >
-<AppIcon name='walk' color={AppColor.Secondary2} size={-14} />
-<AppText.Text6 color={AppColor.Secondary2} > Select Activity</AppText.Text6>
+<AppIcon name='walk' color={AppColor.TextLight} size={-14} />
+<AppText.Text6 color={AppColor.TextLight} > Select Activity</AppText.Text6>
 </View>
 
 
@@ -287,39 +287,39 @@ visible={modalVisible}
   onPress = { () => { setIsDatePicker(false), setPickerContent(allActivities || 'no activity'), setPickerActive(true) }}
   style={styles.button}
 >
-<AppText.Text5 color={AppColor.Primary3} >{pickerType ? pickerType : 'Press to select' }   </AppText.Text5>
-<AppIcon name={checkIcon(pickerType)} color={AppColor.Primary3} size={-4} />
+<AppText.Text5 color={AppColor.TextDark} >{pickerType ? pickerType : 'Press to select' }   </AppText.Text5>
+<AppIcon name={checkIcon(pickerType)} color={AppColor.TextDark} size={-4} />
 </TouchableOpacity>
 
 <View  style={styles.title} >
-<AppIcon name='timer' color={AppColor.Secondary2} size={-14} />
-<AppText.Text6 color={AppColor.Secondary2} > Duration of Training (min)</AppText.Text6>
+<AppIcon name='timer' color={AppColor.TextLight} size={-14} />
+<AppText.Text6 color={AppColor.TextLight} > Duration of Training (min)</AppText.Text6>
 </View>
 
 <TouchableOpacity
   onPress = { () => { setIsDatePicker(false), setPickerContent(Duration), setPickerActive(true) }}
   style={styles.button}
 >
-<AppText.Text5 color={AppColor.Primary3} >{pickerDuration ? pickerDuration : 'Press to select' }   </AppText.Text5>
-<AppIcon name='arrow-down' color={AppColor.Primary3} size={-4} />
+<AppText.Text5 color={AppColor.TextDark} >{pickerDuration ? pickerDuration : 'Press to select' }   </AppText.Text5>
+<AppIcon name='arrow-down' color={AppColor.TextDark} size={-4} />
 </TouchableOpacity>
 
 <View  style={styles.title} >
-<AppIcon name='pulse' color={AppColor.Secondary2} size={-14} />
-<AppText.Text6 color={AppColor.Secondary2} > Intensity</AppText.Text6>
+<AppIcon name='pulse' color={AppColor.TextLight} size={-14} />
+<AppText.Text6 color={AppColor.TextLight} > Intensity</AppText.Text6>
 </View>
 
 <TouchableOpacity
   onPress = { () => { setIsDatePicker(false), setPickerContent(Intensity), setPickerActive(true) }}
   style={styles.button}
 >
-<AppText.Text5 color={AppColor.Primary3} >{pickerIntensity ? pickerIntensity : 'Press to select' }   </AppText.Text5>
-<AppIcon name='arrow-down' color={AppColor.Primary3} size={-4} />
+<AppText.Text5 color={AppColor.TextDark} >{pickerIntensity ? pickerIntensity : 'Press to select' }   </AppText.Text5>
+<AppIcon name='arrow-down' color={AppColor.TextDark} size={-4} />
 </TouchableOpacity>
 
 <View  style={styles.title} >
-<AppIcon name='clock' color={AppColor.Secondary2} size={-14} />
-<AppText.Text6 color={AppColor.Secondary2} > Date and Time</AppText.Text6>
+<AppIcon name='clock' color={AppColor.TextLight} size={-14} />
+<AppText.Text6 color={AppColor.TextLight} > Date and Time</AppText.Text6>
 </View>
 
 <TouchableOpacity
@@ -446,7 +446,8 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center',
-    borderColor: AppColor.Secondary2,
+    borderColor: AppColor.InputBorder,
+    backgroundColor: AppColor.InputBG,
     borderWidth:0.3,
     marginTop: AppStyle.hh * 0.004,
     marginBottom: AppStyle.hh * 0.009,
@@ -466,7 +467,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor: AppColor.Secondary2,
+    backgroundColor: AppColor.ButtonBG,
     padding: (AppStyle.ww + AppStyle.hh) * 0.002,
     borderRadius: (AppStyle.ww + AppStyle.hh) * 0.008,
   },

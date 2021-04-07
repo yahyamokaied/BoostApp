@@ -130,7 +130,7 @@ return (
   <View style={styles.body}>
 {/* Body content */}
 
-<AppText.Text3 color={AppColor.BlackColor} > Steps </AppText.Text3>
+<AppText.Text3 color={AppColor.Title} > Steps </AppText.Text3>
 
   
 
@@ -322,7 +322,7 @@ return (
 
 
 
-<AppText.Text3 color={AppColor.BlackColor} > Completed Activities </AppText.Text3>
+<AppText.Text3 color={AppColor.Title} > Completed Activities </AppText.Text3>
 
 
 <View style={styles.activities}>
@@ -340,7 +340,7 @@ return (
         width={AppStyle.ww / 3.8}
         height={AppStyle.hh / 25}
         alignSelf='flex-end'
-        backgroundColor={AppColor.Secondary}
+        backgroundColor={AppColor.ButtonBG}
         marginHorizontal={AppStyle.ww / 40}
         marginVertical={AppStyle.hh / 80}
 />
@@ -389,8 +389,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position:'absolute',
-    backgroundColor: AppColor.Secondary2,
-    opacity: 0.7
+    backgroundColor: AppColor.Stripe,
+    opacity: AppColor.Transparency
   },
   content1:{
     position:'absolute',
@@ -462,16 +462,6 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.BlackColor,
     opacity:0.6
   },
-  flagbutton: {
-    flexDirection:'row',
-    width: '100%',
-    height: '15%',
-    justifyContent:'center',
-    alignItems:'center',
-    position:'absolute',
-    bottom:0,
-    backgroundColor: AppColor.Secondary2,
-  },
   body: {
     flex:1,
     alignItems:'center',
@@ -482,7 +472,7 @@ const styles = StyleSheet.create({
     width: (AppStyle.hh + AppStyle.ww) * 0.05  ,
     height: (AppStyle.hh + AppStyle.ww) * 0.05  ,
     borderRadius: (AppStyle.hh + AppStyle.ww) * 0.025,
-    borderColor:AppColor.Primary2,
+    borderColor:AppColor.Border,
     borderWidth: 1,
     marginVertical:AppStyle.hh * 0.01
   },
@@ -490,7 +480,7 @@ const styles = StyleSheet.create({
     width: (AppStyle.hh + AppStyle.ww) * 0.04  ,
     height: (AppStyle.hh + AppStyle.ww) * 0.04  ,
     borderRadius: (AppStyle.hh + AppStyle.ww) * 0.025,
-    borderColor:AppColor.Primary2,
+    borderColor:AppColor.Border,
     borderWidth: 1,
     marginVertical:AppStyle.hh * 0.01
   },
@@ -518,7 +508,7 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems:'center',
     borderWidth:0.25,
-    borderColor: AppColor.Secondary2,
+    borderColor: AppColor.ButtonBG,
     marginVertical:AppStyle.hh * 0.008
   },
   steps: {
@@ -565,7 +555,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-evenly',
     alignItems:'center',
-    borderColor:AppColor.Secondary2,
+    borderColor:AppColor.StarPoint,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.009,
     borderWidth:0.3
   },
@@ -575,7 +565,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: AppColor.Secondary,
+    backgroundColor: AppColor.StarPoint,
     borderRadius: (AppStyle.ww + AppStyle.hh)* 0.008,
   }
 });
